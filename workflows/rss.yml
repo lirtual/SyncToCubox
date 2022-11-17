@@ -1,6 +1,6 @@
 on:
   rss:
-    url: ${{ secrets.API_TOKEN }}
+    url: ${{ secrets.RSS_FEED }}
 jobs:
   request:
     name: Request
@@ -9,7 +9,7 @@ jobs:
       - name: Make a HTTP Request      
         uses: actionsflow/axios@main
         with:
-          url: ${{ secrets.API_TOKEN }}
+          url: ${{ secrets.API }}
           method: POST
           body: |
             {
