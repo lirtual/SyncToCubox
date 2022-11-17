@@ -1,6 +1,6 @@
 on:
   rss:
-    url: ${{ secrets.API_TOKEN }}
+    url: ${{secrets.API_TOKEN}}
 jobs:
   request:
     name: Request
@@ -9,7 +9,7 @@ jobs:
       - name: Make a HTTP Request      
         uses: actionsflow/axios@main
         with:
-          url: https://cubox.pro/c/api/save/${{ secrets.API_TOKEN }}
+          url: https://cubox.pro/c/api/save/${{secrets.API_TOKEN}}
           method: POST
           body: |
             {
