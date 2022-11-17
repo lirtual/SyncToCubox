@@ -1,17 +1,19 @@
 on:
   rss:
-    url: https://hnrss.org/newest?points=300&count=3
+    url: ${{ secrets.API_TOKEN }}
 jobs:
-  print:
-    name: Print
+  request:
+    name: Request
     runs-on: ubuntu-latest
     steps:
-      - name: Print Outputs
-        env:
-          title: ${{on.rss.outputs.title}}
-          contentSnippet: ${{on.rss.outputs.contentSnippet}}
-          link: ${{on.rss.outputs.link}}
-        run: |
-          echo title: $title
-          echo contentSnippet: $contentSnippet
-          echo link: $link
+      - name: Make a HTTP Request      
+        uses: actionsflow/axios@main
+        with:
+          url: https://cubox.pro/c/api/save/${{ secrets.API_TOKEN }}
+          method: POST
+          body: |
+            {
+              "content":"${{on.rss.outputs.link}}", 
+              "type":"url",
+              "folder":"全部收藏"
+            }
