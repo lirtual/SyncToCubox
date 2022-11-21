@@ -1,11 +1,19 @@
 on:
-  rss:
-    url: ${{ secrets.RSS_FEED }}
+  poll:
+    url: ${{ secrets.API2 }}
+    requestConfig:
+      method: GET
+      headers:
+        Authorization: Bearer ${{ secrets.API2_TOKEN }}
+    itemsPath: items
+    deduplicationKey: _id
 jobs:
   request:
     name: Request
     runs-on: ubuntu-latest
     steps:
+      - name: Print Outputs
+        run: echo "link:${{ on.poll.outputs.link }}"
       - name: Make a HTTP Request      
         uses: actionsflow/axios@main
         with:
@@ -13,7 +21,7 @@ jobs:
           method: POST
           body: |
             {
-              "content":"${{on.rss.outputs.link}}", 
+              "content":"${{ on.poll.outputs.link }}", 
               "type":"url",
               "folder":"全部收藏"
             }
