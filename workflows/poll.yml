@@ -18,10 +18,12 @@ jobs:
         uses: actionsflow/axios@main
         with:
           url: https://cubox.pro/c/api/save/${{ secrets.API_TOKEN }}
+          accept: 200
+          timeout: 10000
           method: POST
           body: |
             {
               "content":"${{ on.poll.outputs.link }}", 
               "type":"url",
-              "folder":"全部收藏"
+              "folder":"Library"
             }
